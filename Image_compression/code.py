@@ -66,5 +66,13 @@ def J(c, u, X):
     return sums
 
 [c, u] = rgbKmeans(16, X)
-print c
 
+# Plot the result image
+sizex = len(X)
+sizey = len(X[0])
+X_2 = np.zeros((sizex, sizey, 3), np.int)
+for i in range(sizex):
+    for j in range(sizey):
+        X_2[i, j] = u[c[i, j]]
+plt.imshow(X_2)
+plt.show()
