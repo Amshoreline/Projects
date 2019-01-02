@@ -88,13 +88,15 @@ def backward_prop(data, labels, params):
     U.shape = (m, 1) # => (1000L, 1L)
     U = (labels - a_2 * U)
     
-    gradW2 = (-1.0 / m) * np.matmul(np.transpose(U), a_1)
+    lamb = 0.0001
+    
+    gradW2 = (-1.0 / m) * np.matmul(np.transpose(U), a_1) + lamb * W2
     gradb2 = np.sum(U, axis=0)
     gradb2.shape = (n_3, 1)
     gradb2 = (-1.0 / m) * gradb2
     
     V = np.matmul(U, W2) * a_1 * (1 - a_1)
-    gradW1 = (-1.0 / m) * np.matmul(np.transpose(V), data)
+    gradW1 = (-1.0 / m) * np.matmul(np.transpose(V), data) + lamb * W1
     gradb1 = np.sum(V, axis=0)
     gradb1.shape = (n_2, 1)
     gradb1 = (-1.0 / m) * gradb1
